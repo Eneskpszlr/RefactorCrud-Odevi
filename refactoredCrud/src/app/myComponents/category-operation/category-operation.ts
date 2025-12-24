@@ -116,11 +116,11 @@ export class CategoryOperation implements OnInit{
       return `${label} zorunludur`;
     else if(control.hasError('minlength')){
       const e = control.getError('minlength'); //requiredlength, actuallength
-      return `${label} en az ${e.requiredlength} karakter olmalıdır`;
+      return `${label} en az ${e.requiredLength} karakter olmalıdır`;
     }
     else if(control.hasError('maxlength')){
       const e = control.getError('maxlength');
-      return `${label} en fazla ${e.requiredlength} karakter olmalıdır`;
+      return `${label} en fazla ${e.requiredLength} karakter olmalıdır`;
     }
 
     return `${label} geçersiz`;

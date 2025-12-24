@@ -18,3 +18,48 @@
         </tr>
     }
 </table>
+
+<hr>
+
+<form [formGroup]="createForm" (ngSubmit)="onCreate()">
+
+    <h3>Kategori Ekle</h3>
+    <label>İsim
+        <input type="text" formControlName="name">
+    </label>
+    @if (getErrorMessageByName(createForm, 'name'); as msg) {
+        <div class="error">
+            {{ msg }}
+        </div>
+    }
+    <label>
+        Açıklama
+        <input type="text" formControlName="description">
+    </label>
+
+    @if (getErrorMessageByName(createForm, 'description'); as msg) {
+        <div class="error">
+            {{ msg }}
+        </div>
+    }
+
+    <button type="submit" [disabled]="createForm.invalid">Ekle</button>
+</form>
+
+<hr>
+@if (selectedCategory() !== null) {
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+        <h3>Kategori Güncelle</h3>
+        <input type="hidden" formControlName="id">
+
+        <label>
+            İsim
+            <input type="text" formControlName="name">
+        </label>
+        @if (getErrorMessageByName(updateForm,'name'); as msg) {
+            <div class="error">
+                {{msg}}
+            </div>
+        }
+    </form>
+}
