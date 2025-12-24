@@ -1,0 +1,6 @@
+@CoreAPIForVB_HostAddress = http://localhost:5017
+
+GET {{CoreAPIForVB_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

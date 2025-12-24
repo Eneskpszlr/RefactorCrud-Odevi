@@ -1,0 +1,22 @@
+# IDE / Editor
+.vs/
+.vscode/
+.idea/
+
+# .NET / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.log
+
+# Angular / Node
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+
+# Environment / Secrets
+.env
+appsettings.Development.json
+appsettings.Production.json
