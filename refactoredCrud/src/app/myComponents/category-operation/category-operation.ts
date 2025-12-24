@@ -48,4 +48,88 @@ export class CategoryOperation implements OnInit{
     this.createForm.reset();
     await this.refreshCategories();
   }
+
+  //Update işlemleri
+  startUpdate(cat:CategoryResponseModel){
+    this.selectedCategory.set(cat);
+    this.updateForm.patchValue(
+      {
+        id: cat.id,
+        name: cat.categoryName,
+        description: cat.description,
+      },
+      { emitEvent: false }
+    );
+  }
+
+  cancelUpdate(){
+    this.selectedCategory.set(null);
+    this.updateForm.reset({ id: 0, name: '', description: '' });
+  }
+
+  async onUpdate(){
+    if(this.updateForm.invalid){
+      this.updateForm.markAllAsTouched();
+      return;
+    }
+
+    const req = toUpdateCategoryRequest(this.updateForm);
+    await this.categoryApi.update(req);
+    this.cancelUpdate();
+    await this.refreshCategories();
+  }
+
+  //Delete
+  async onDelete(id:number): Promise<void>{
+    const confirmDelete = window.confirm(
+      `Id'si ${id} olan kategoriyi silmek istediğinize emin misiniz?`
+    );
+
+    if(!confirmDelete) return;
+
+    try {
+      const message = await this.categoryApi.deleteById(id);
+      console.log(`Delete mesajı`, message);
+
+      this.categories.update((X) => X.filter((c) => c.id !== id));
+
+      const selected = this.selectedCategory();
+      if(selected && selected.id === id){
+        this.selectedCategory.set(null);
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  protected labels:Record<string,string> ={
+    name: 'Kategori Adı',
+    description: 'Açıklama',
+    id: 'Id',
+  };
+
+  protected getErrorMessage(control:AbstractControl|null,label='Bu alan'):string|null{
+    if(!control || (!control.touched && !control.dirty) || !control.invalid)
+      return null;
+    else if(control.hasError('required'))
+      return `${label} zorunludur`;
+    else if(control.hasError('minlength')){
+      const e = control.getError('minlength'); //requiredlength, actuallength
+      return `${label} en az ${e.requiredlength} karakter olmalıdır`;
+    }
+    else if(control.hasError('maxlength')){
+      const e = control.getError('maxlength');
+      return `${label} en fazla ${e.requiredlength} karakter olmalıdır`;
+    }
+
+    return `${label} geçersiz`;
+  }
+
+  protected getErrorMessageByName(form:{controls:Record<string, AbstractControl>}, controlName:string) : string|null{
+    const control = form.controls[controlName];
+    const label = this.labels[controlName] ?? controlName;
+
+    return this.getErrorMessage(control, label);
+  }
 }

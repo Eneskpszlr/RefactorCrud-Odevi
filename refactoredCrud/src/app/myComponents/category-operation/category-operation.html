@@ -1,1 +1,20 @@
-<p>category-operation works!</p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>İsim</th>
+        <th>Açıklama</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @for(category of categories(); track category.id){
+        <tr>
+            <td>{{category.id}} </td>
+            <td>{{category.categoryName}} </td>
+            <td>{{category.description}} </td>
+            <td>
+                <button (click)="startUpdate(category)">Güncelle</button>
+                <button (click)="onDelete(category.id)">Sil</button>
+            </td>
+        </tr>
+    }
+</table>
