@@ -61,5 +61,18 @@
                 {{msg}}
             </div>
         }
+
+        <label>
+            Açıklama
+            <input type="text" formControlName="description">
+        </label>
+        @if(getErrorMessageByName(updateForm,'description'); as msg){
+            <div class="error">
+                {{ msg }}
+            </div>
+        }
+
+        <button type="submit" [disabled]="updateForm.invalid">Güncelle</button>
+        <button type="button" (click)="cancelUpdate()">İptal</button>
     </form>
 }
