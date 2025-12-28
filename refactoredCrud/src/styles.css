@@ -1,3 +1,126 @@
+/* -------------------------------------------------- */
+/* NAVBAR (Global Üst Menü)                          */
+/* -------------------------------------------------- */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  /* Tablo ile aynı koyu arka plan */
+  background: #0f1116; 
+  
+  /* Tablo başlığındaki (th) border rengiyle uyumlu alt çizgi */
+  border-bottom: 2px solid #222631;
+  
+  padding: 0 20px;
+  height: 60px; /* Sabit yükseklik */
+  
+  /* Hafif gölge */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  
+  /* Sayfa kayarken üstte sabit kalsın istersen: */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Sol taraftaki Logo/Başlık alanı */
+.nav-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e2e6f3;
+  letter-spacing: 1px;
+  margin-right: 30px;
+  
+  /* İkon veya metin yanına hafif mavi bir gradient text efekti */
+  background: linear-gradient(to right, #e2e6f3, #9cc3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Linkleri kapsayan alan */
+.nav-links {
+  display: flex;
+  gap: 5px;
+  flex-grow: 1; /* Boşluğu doldur */
+}
+
+/* Linklerin kendisi */
+.navbar a {
+  text-decoration: none;
+  color: #9cc3ff; /* Tablo başlık rengiyle uyumlu */
+  font-size: 14px;
+  padding: 0 16px;
+  height: 60px; /* Navbar yüksekliği kadar */
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent; /* Aktiflik çizgisi için yer tutucu */
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+}
+
+/* Hover (Fare üzerine gelince) */
+.navbar a:hover {
+  color: #d6e2ff;
+  background: rgba(255, 255, 255, 0.03); /* Çok hafif aydınlatma */
+}
+
+/* Aktif Sayfa (routerLinkActive="active" tetiklendiğinde) */
+.navbar a.active {
+  color: #4f8bff; /* Senin tema mavisi */
+  background: rgba(79, 139, 255, 0.08); /* Hafif mavi zemin */
+  border-bottom-color: #4f8bff; /* Altına neon çizgi */
+  
+  /* Hafif yazı parlaması */
+  text-shadow: 0 0 8px rgba(79, 139, 255, 0.4); 
+}
+
+/* -------------------------------------------------- */
+/* NAVBAR RESPONSIVE (Mobil)                         */
+/* -------------------------------------------------- */
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .navbar a {
+    height: 40px;
+    font-size: 13px;
+    padding: 0 12px;
+    border-bottom: none; /* Mobilde alt çizgi yerine */
+    border-radius: 4px;  /* Kutu gibi olsun */
+  }
+
+  .navbar a.active {
+    border-bottom: none;
+    background: #1b1e26; /* Mobilde daha belirgin arka plan */
+    box-shadow: inset 0 0 0 1px #4f8bff; /* Kenarlık efekti */
+  }
+}
+
+/* İÇERİK İÇİN CONTAINER AYARI */
+/* Navbar sabit olduğu için içeriği biraz aşağı itmek ve ortalamak gerekebilir */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+
+
 /* --- TABLO KABUĞU (Container) --- */
 table {
   width: 100%;

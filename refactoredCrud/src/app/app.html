@@ -1,8 +1,12 @@
-<nav style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid beige;">
-
-  <a routerLink="categories">Categories</a>
-  <a routerLink="products">Products</a>
+<nav class="navbar">
+  
+  <div class="nav-links">
+    <a routerLink="categories" routerLinkActive="active">Categories</a>
+    <a routerLink="products" routerLinkActive="active">Products</a>
+  </div>
 
 </nav>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
